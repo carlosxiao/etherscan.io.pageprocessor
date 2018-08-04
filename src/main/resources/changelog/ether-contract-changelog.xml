@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.0.xsd">
+
+    <changeSet id="add_table_ether_contract" author="carlosxiao">
+        <createTable tableName="ether_contract" remarks="合约">
+            <column name="id" type="bigint" remarks="主键标识" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false" />
+            </column>
+            <column name="address" type="varchar(42)" remarks="合约地址"/>
+            <column name="contract_name" type="varchar(128)" remarks="合约名称"/>
+            <column name="date_verified" type="varchar(32)" remarks="发布日期"/>
+            <column name="access_url" type="varchar(128)" remarks="访问地址"/>
+            <column name="transactions" type="varchar(20)" remarks=""/>
+            <column name="create_address" type="varchar(128)" remarks=""/>
+            <column name="txn" type="varchar(128)" remarks=""/>
+            <column name="source_code" type="text" remarks="源代码"/>
+        </createTable>
+        <createIndex tableName="ether_contract" unique="true" indexName="INDEX_ETHER_CONTRACT_ADDRESS">
+            <column name="address" />
+        </createIndex>
+        <createIndex tableName="ether_contract" indexName="INDEX_ETHER_CONTRACT_CREATE_ADDRESS">
+            <column name="create_address" />
+        </createIndex>
+
+    </changeSet>
+</databaseChangeLog>

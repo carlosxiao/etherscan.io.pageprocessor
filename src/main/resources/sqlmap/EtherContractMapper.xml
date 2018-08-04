@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cc.etherscan.io.mapper.EtherContractMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.cc.etherscan.io.entity.EtherContract">
+        <id column="id" property="id" />
+        <result column="address" property="address" />
+        <result column="contract_name" property="contractName" />
+        <result column="date_verified" property="dateVerified" />
+        <result column="access_url" property="accessUrl" />
+        <result column="transactions" property="transactions" />
+        <result column="create_address" property="createAddress" />
+        <result column="txn" property="txn" />
+        <result column="source_code" property="sourceCode" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, address, contract_name AS contractName, date_verified AS dateVerified, access_url AS accessUrl, transactions, create_address AS createAddress, txn, source_code AS sourceCode
+    </sql>
+
+</mapper>

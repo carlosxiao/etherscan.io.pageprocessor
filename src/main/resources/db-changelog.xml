@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+		http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.3.xsd">
+
+    <property name="now" value="sysdate" dbms="mysql"/>
+
+    <!--原则上，这里只留下以项目模块为单位的include, 名字建议采用模块全名-->
+    <include file="classpath:changelog/ether-contract-changelog.xml"/>
+
+
+</databaseChangeLog>
