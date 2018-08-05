@@ -1,0 +1,9 @@
+spring:
+  redis:
+    host: 172.17.0.5
+    port: 6379
+    password: bp)82vM4@]8Wz-PK
+  datasource:
+    url: jdbc:mysql://122.152.203.240:3307/esc?useUnicode=true&characterEncoding=utf8
+    username: esc
+    password: esc

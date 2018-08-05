@@ -2,6 +2,7 @@ package com.cc.etherscan.io.schedule;
 
 import com.cc.etherscan.io.pipeline.EthereumPipeline;
 import com.cc.etherscan.io.processor.EthereumContractProcessor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Component;
 import us.codecraft.webmagic.Spider;
@@ -22,13 +23,16 @@ public class EtherEumSchedule {
     @Resource
     private EthereumPipeline ethereumPipeline;
 
-    int pageSize = 10;
+    int pageSize = 25;
 
     int totalPage = 3898;
 
+    @Value("${etherscan.startPage}")
+    private int startPage;
+
     @PostConstruct
     public void start() {
-        for (int i = 1; i<= totalPage; i++) {
+        for (int i = startPage; i<= totalPage; i++) {
             Spider.create(new EthereumContractProcessor(redisTemplate))
                     .addUrl("https://etherscan.io/contractsVerified/" + i + "?ps=" + pageSize)
                     .addPipeline(ethereumPipeline)
