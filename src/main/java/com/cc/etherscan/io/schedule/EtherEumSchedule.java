@@ -22,9 +22,9 @@ public class EtherEumSchedule {
     @Resource
     private EthereumPipeline ethereumPipeline;
 
-    int pageSize = 100;
+    int pageSize = 10;
 
-    int totalPage = 390;
+    int totalPage = 3898;
 
     @PostConstruct
     public void start() {
@@ -32,10 +32,10 @@ public class EtherEumSchedule {
             Spider.create(new EthereumContractProcessor(redisTemplate))
                     .addUrl("https://etherscan.io/contractsVerified/" + i + "?ps=" + pageSize)
                     .addPipeline(ethereumPipeline)
-                    .thread(5)
+                    .thread(8)
                     .run();
             try {
-                Thread.sleep(10000);
+                Thread.sleep(4000);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }

@@ -1,19 +1,14 @@
 spring:
-  redis:
-    host: 127.0.0.1
-    port: 6379
-    password: 123456
   datasource:
     driverClassName: com.mysql.jdbc.Driver
-    url: jdbc:mysql://127.0.0.1:3306/esc?useUnicode=true&characterEncoding=utf8
-    username: root
-    password: root
     type: com.zaxxer.hikari.HikariDataSource
     hikari:
       minimum-idle: 10
       maximum-pool-size: 200
       pool-name: ESC-POOL
       connection-test-query: SELECT 1 FROM DUAL
+  profiles:
+    active: test
 liquibase:
   change-log: classpath:db-changelog.xml
 mybatis-plus:

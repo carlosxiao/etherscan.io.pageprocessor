@@ -17,7 +17,7 @@
             <column name="transactions" type="varchar(20)" remarks=""/>
             <column name="create_address" type="varchar(128)" remarks=""/>
             <column name="txn" type="varchar(128)" remarks=""/>
-            <column name="source_code" type="text" remarks="源代码"/>
+            <column name="source_code" type="longblob" remarks="源代码"/>
         </createTable>
         <createIndex tableName="ether_contract" unique="true" indexName="INDEX_ETHER_CONTRACT_ADDRESS">
             <column name="address" />

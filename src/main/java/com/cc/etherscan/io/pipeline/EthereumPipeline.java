@@ -3,8 +3,11 @@ package com.cc.etherscan.io.pipeline;
 import com.cc.etherscan.io.common.Constants;
 import com.cc.etherscan.io.entity.EtherContract;
 import com.cc.etherscan.io.mapper.EtherContractMapper;
+import lombok.extern.slf4j.Slf4j;
+import org.jsoup.helper.StringUtil;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Component;
+import org.springframework.util.StringUtils;
 import us.codecraft.webmagic.ResultItems;
 import us.codecraft.webmagic.Task;
 import us.codecraft.webmagic.pipeline.Pipeline;
@@ -15,6 +18,7 @@ import javax.annotation.Resource;
  * @author carlosxiao
  */
 @Component
+@Slf4j
 public class EthereumPipeline implements Pipeline {
 
     @Resource
@@ -35,6 +39,10 @@ public class EthereumPipeline implements Pipeline {
         String sourceCode = resultItems.get("sourceCode");
 
         String rAddress = (String) redisTemplate.opsForHash().get(String.format(Constants.REDIS_ETHER_EUM_KEY, address), "address");
+        if (StringUtils.isEmpty(rAddress) || StringUtil.isBlank(address)) {
+            log.error("address or rAddress is null: address: {}, aAddress: {}, RequestUrl: {}", address, rAddress, resultItems.getRequest().getUrl());
+            return;
+        }
         if (!address.equals(rAddress)) {
             return;
         }
@@ -52,6 +60,10 @@ public class EthereumPipeline implements Pipeline {
         contract.setContractName(contractName);
         contract.setDateVerified(dateVerified);
         contract.setAccessUrl(accessUrl);
-        etherContractMapper.insert(contract);
+        try {
+            etherContractMapper.insert(contract);
+        } catch (Exception e) {
+            log.error("insert failure: {}", e);
+        }
     }
 }

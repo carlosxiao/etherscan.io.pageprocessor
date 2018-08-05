@@ -3,6 +3,7 @@ package com.cc.etherscan.io.processor;
 import com.cc.etherscan.io.common.Constants;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.util.StringUtils;
 import us.codecraft.webmagic.Page;
 import us.codecraft.webmagic.Site;
 import us.codecraft.webmagic.processor.PageProcessor;
@@ -41,8 +42,12 @@ public class EthereumContractProcessor implements PageProcessor {
                 String contractName = page.getHtml().xpath("/html/body/div[1]/div[5]/div[3]/div/div/div/table/tbody/tr[" + i + "]/td[2]/text()").get();
                 String dateVerified = page.getHtml().xpath("/html/body/div[1]/div[5]/div[3]/div/div/div/table/tbody/tr[" + i + "]/td[7]/text()").get();
                 String url = "https://etherscan.io/address/" + address + "#code";
+                if (StringUtils.isEmpty(address)) {
+                    log.error("cannot resolve address, RequestUrl: {}", page.getRequest().getUrl());
+                    continue;
+                }
                 if (redisTemplate.hasKey(String.format(REDIS_ETHER_EUM_KEY, address))) {
-                    return;
+                    continue;
                 }
                 page.addTargetRequest(url);
                 Map<String, String> map = new HashMap<>();
