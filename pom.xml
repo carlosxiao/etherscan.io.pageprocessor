@@ -152,7 +152,7 @@
 							<vendor>DH</vendor>
 							<packager>DH</packager>
 							<needarch>noarch</needarch>
-							<name>dh-winghead-migration</name>
+							<name>ether-contract-processor</name>
 							<prefixes>
 								<prefix>${APP_HOME}</prefix>
 							</prefixes>
