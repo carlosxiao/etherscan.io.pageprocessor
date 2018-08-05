@@ -32,6 +32,9 @@ public class EtherEumSchedule {
     @Value("${etherscan.startPage}")
     private int startPage;
 
+    @Value("${etherscan.threadCount}")
+    private int threadCount = 2;
+
     @PostConstruct
     public void start() {
         for (int i = startPage; i<= totalPage; i++) {

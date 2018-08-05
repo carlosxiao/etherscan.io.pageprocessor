@@ -43,3 +43,4 @@ etherscan:
   pageSize: 25
   startPage: 10
   totalPage: 1560
+  threadCount: 5
