@@ -35,16 +35,19 @@ public class EtherEumSchedule {
     @Value("${etherscan.threadCount}")
     private int threadCount = 2;
 
+    @Value("${etherscan.intervalSeconds}")
+    private int intervalSeconds = 4;
+
     @PostConstruct
     public void start() {
         for (int i = startPage; i<= totalPage; i++) {
             Spider.create(new EthereumContractProcessor(redisTemplate))
                     .addUrl("https://etherscan.io/contractsVerified/" + i + "?ps=" + pageSize)
                     .addPipeline(ethereumPipeline)
-                    .thread(8)
+                    .thread(threadCount)
                     .run();
             try {
-                Thread.sleep(4000);
+                Thread.sleep(intervalSeconds * 1000);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
