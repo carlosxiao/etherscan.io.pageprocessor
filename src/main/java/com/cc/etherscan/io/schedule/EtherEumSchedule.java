@@ -23,9 +23,11 @@ public class EtherEumSchedule {
     @Resource
     private EthereumPipeline ethereumPipeline;
 
-    int pageSize = 25;
+    @Value("${etherscan.pageSize}")
+    private int pageSize = 0;
 
-    int totalPage = 3898;
+    @Value("${etherscan.totalPage}")
+    private int totalPage = 0;
 
     @Value("${etherscan.startPage}")
     private int startPage;

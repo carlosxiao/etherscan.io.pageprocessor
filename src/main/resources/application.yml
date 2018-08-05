@@ -42,4 +42,4 @@ mybatis-plus:
 etherscan:
   pageSize: 25
   startPage: 10
-  totalPage: 1520
+  totalPage: 1560
