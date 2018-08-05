@@ -40,4 +40,6 @@ mybatis-plus:
     map-underscore-to-camel-case: true
     cache-enabled: false
 etherscan:
+  pageSize: 25
   startPage: 10
+  totalPage: 1520
