@@ -33,7 +33,6 @@ public class EthereumPipeline implements Pipeline {
             return;
         }
         String address = resultItems.get("address");
-        String transactions = resultItems.get("transactions");
         String createAddress = resultItems.get("createAddress");
         String txn = resultItems.get("txn");
         String sourceCode = resultItems.get("sourceCode");
@@ -50,6 +49,7 @@ public class EthereumPipeline implements Pipeline {
         String contractName = (String) redisTemplate.opsForHash().get(String.format(Constants.REDIS_ETHER_EUM_KEY, address), "contractName");
         String dateVerified = (String) redisTemplate.opsForHash().get(String.format(Constants.REDIS_ETHER_EUM_KEY, address), "dateVerified");
         String accessUrl = (String) redisTemplate.opsForHash().get(String.format(Constants.REDIS_ETHER_EUM_KEY, address), "accessUrl");
+        String transactions = (String) redisTemplate.opsForHash().get(String.format(Constants.REDIS_ETHER_EUM_KEY, address), "transactions");
 
         EtherContract contract = new EtherContract();
         contract.setAddress(address);

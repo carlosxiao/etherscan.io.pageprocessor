@@ -41,6 +41,8 @@ public class EthereumContractProcessor implements PageProcessor {
                 String address = page.getHtml().xpath("/html/body/div[1]/div[5]/div[3]/div/div/div/table/tbody/tr[" + i + "]/td[1]/a/text()").get();
                 String contractName = page.getHtml().xpath("/html/body/div[1]/div[5]/div[3]/div/div/div/table/tbody/tr[" + i + "]/td[2]/text()").get();
                 String dateVerified = page.getHtml().xpath("/html/body/div[1]/div[5]/div[3]/div/div/div/table/tbody/tr[" + i + "]/td[7]/text()").get();
+                String transactions = page.getHtml().xpath("/html/body/div[1]/div[5]/div[3]/div/div/div/table/tbody/tr[" + i + "]/td[5]/text()").get();
+
                 String url = "https://etherscan.io/address/" + address + "#code";
                 if (StringUtils.isEmpty(address)) {
                     log.error("cannot resolve address, RequestUrl: {}", page.getRequest().getUrl());
@@ -54,18 +56,17 @@ public class EthereumContractProcessor implements PageProcessor {
                 map.put("address", address);
                 map.put("contractName", contractName);
                 map.put("dateVerified", dateVerified);
+                map.put("transactions", transactions);
                 map.put("accessUrl", url);
                 redisTemplate.boundHashOps(String.format(REDIS_ETHER_EUM_KEY, address)).putAll(map);
             }
         } else {
             //
             String address = page.getHtml().xpath("//*[@id=\"mainaddress\"]/text()").get();
-            String transactions = page.getHtml().xpath("//*[@id=\"ContentPlaceHolder1_divSummary\"]/div[1]/table/tbody/tr[3]/td[2]/span/text()").get();
             String createAddress = page.getHtml().xpath("//*[@id=\"ContentPlaceHolder1_trContract\"]/td[2]/a/text()").get();
             String txn = page.getHtml().xpath("//*[@id=\"ContentPlaceHolder1_trContract\"]/td[2]/span/a/text()").get();
             String sourceCode = page.getHtml().xpath("//*[@id=\"editor\"]/text()").get();
             page.putField("address", address);
-            page.putField("transactions", transactions);
             page.putField("createAddress", createAddress);
             page.putField("txn", txn);
             page.putField("sourceCode", sourceCode);
