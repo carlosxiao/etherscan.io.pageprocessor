@@ -9,8 +9,8 @@ spring:
       connection-test-query: SELECT 1 FROM DUAL
   profiles:
     active: test
-liquibase:
-  change-log: classpath:db-changelog.xml
+#liquibase:
+  #change-log: classpath:db-changelog.xml
 mybatis-plus:
   mapper-locations: classpath*:sqlmap/*Mapper.xml
   typeAliasesPackage: com.cc.etherscan.io.entity
