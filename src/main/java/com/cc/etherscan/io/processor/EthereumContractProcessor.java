@@ -1,6 +1,10 @@
 package com.cc.etherscan.io.processor;
 
+import com.baomidou.mybatisplus.mapper.EntityWrapper;
+import com.baomidou.mybatisplus.mapper.Wrapper;
 import com.cc.etherscan.io.common.Constants;
+import com.cc.etherscan.io.entity.EtherContract;
+import com.cc.etherscan.io.mapper.EtherContractMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.util.StringUtils;
@@ -26,8 +30,11 @@ public class EthereumContractProcessor implements PageProcessor {
 
     private RedisTemplate redisTemplate;
 
-    public EthereumContractProcessor(RedisTemplate template) {
+    private EtherContractMapper etherContractMapper;
+
+    public EthereumContractProcessor(RedisTemplate template, EtherContractMapper etherContractMapper) {
         this.redisTemplate = template;
+        this.etherContractMapper = etherContractMapper;
     }
 
 
@@ -49,7 +56,14 @@ public class EthereumContractProcessor implements PageProcessor {
                     continue;
                 }
                 if (redisTemplate.hasKey(String.format(REDIS_ETHER_EUM_KEY, address))) {
-                    continue;
+                    EtherContract queryEntity = new EtherContract();
+                    queryEntity.setAddress(address);
+                    Wrapper<EtherContract> wrapper = new EntityWrapper<>();
+                    wrapper.eq("address", address);
+                    Integer count = etherContractMapper.selectCount(wrapper);
+                    if (count > 0) {
+                        continue;
+                    }
                 }
                 page.addTargetRequest(url);
                 Map<String, String> map = new HashMap<>();

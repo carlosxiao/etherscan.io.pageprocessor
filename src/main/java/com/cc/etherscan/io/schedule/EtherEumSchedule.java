@@ -1,5 +1,6 @@
 package com.cc.etherscan.io.schedule;
 
+import com.cc.etherscan.io.mapper.EtherContractMapper;
 import com.cc.etherscan.io.pipeline.EthereumPipeline;
 import com.cc.etherscan.io.processor.EthereumContractProcessor;
 import org.springframework.beans.factory.annotation.Value;
@@ -23,6 +24,9 @@ public class EtherEumSchedule {
     @Resource
     private EthereumPipeline ethereumPipeline;
 
+    @Resource
+    private EtherContractMapper etherContractMapper;
+
     @Value("${etherscan.pageSize}")
     private int pageSize = 0;
 
@@ -41,7 +45,7 @@ public class EtherEumSchedule {
     @PostConstruct
     public void start() {
         for (int i = startPage; i<= totalPage; i++) {
-            Spider.create(new EthereumContractProcessor(redisTemplate))
+            Spider.create(new EthereumContractProcessor(redisTemplate, etherContractMapper))
                     .addUrl("https://etherscan.io/contractsVerified/" + i + "?ps=" + pageSize)
                     .addPipeline(ethereumPipeline)
                     .thread(threadCount)
