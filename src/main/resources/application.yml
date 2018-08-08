@@ -40,8 +40,8 @@ mybatis-plus:
     map-underscore-to-camel-case: true
     cache-enabled: false
 etherscan:
-  pageSize: 25
-  startPage: 10
-  totalPage: 1560
-  threadCount: 5
-  intervalSeconds: 4
+  pageSize: 10
+  startPage: 1
+  totalPage: 1
+  threadCount: 1
+  intervalSeconds: 1

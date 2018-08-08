@@ -4,10 +4,10 @@ import com.cc.etherscan.io.pipeline.EthereumPipeline;
 import com.cc.etherscan.io.processor.EthereumContractProcessor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 import us.codecraft.webmagic.Spider;
 
-import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
 
 /**
@@ -38,7 +38,7 @@ public class EtherEumSchedule {
     @Value("${etherscan.intervalSeconds}")
     private int intervalSeconds = 4;
 
-    @PostConstruct
+    @Scheduled(cron="0 0/2 * * * ?")
     public void start() {
         for (int i = startPage; i<= totalPage; i++) {
             Spider.create(new EthereumContractProcessor(redisTemplate))
