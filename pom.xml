@@ -129,23 +129,23 @@
 			<build>
 				<plugins>
 					<plugin>
-						<artifactId> maven-assembly-plugin </artifactId>
-						<configuration>
-							<descriptors>
-								<!-- 描述文件路径 -->
-								<descriptor>assembly.xml</descriptor>
-							</descriptors>
-						</configuration>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-assembly-plugin</artifactId>
+						<version>2.5.3</version>
 						<executions>
 							<execution>
-								<!--名字任意 -->
-								<id>make-assembly</id>
+								<id>make-zip</id>
 								<!-- 绑定到package生命周期阶段上 -->
 								<phase>package</phase>
 								<goals>
-									<!-- 只运行一次 -->
+									<!-- 绑定到package生命周期阶段上 -->
 									<goal>single</goal>
 								</goals>
+								<configuration>
+									<descriptors> <!--描述文件路径 -->
+										<descriptor>src/main/resources/assembly.xml</descriptor>
+									</descriptors>
+								</configuration>
 							</execution>
 						</executions>
 					</plugin>

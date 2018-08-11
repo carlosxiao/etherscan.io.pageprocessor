@@ -7,25 +7,24 @@
         <format>tar.gz</format>
     </formats>
     <includeBaseDirectory>false</includeBaseDirectory>
-    <dependencySets>
-        <dependencySet>
-            <unpack>false</unpack>
-            <scope>runtime</scope>
-            <outputDirectory>AlarmReport/lib</outputDirectory>
-            <useProjectArtifact>false</useProjectArtifact>
-        </dependencySet>
-    </dependencySets>
     <fileSets>
         <fileSet>
-            <directory>target/classes</directory>
-            <outputDirectory>AlarmReport</outputDirectory>
+            <directory>src/main/resources/bin</directory>
+            <outputDirectory>bin</outputDirectory>
+            <fileMode>755</fileMode>
+        </fileSet>
+        <fileSet>
+            <directory>src/main/resources/logs</directory>
+            <outputDirectory>logs</outputDirectory>
+            <fileMode>755</fileMode>
+        </fileSet>
+        <fileSet>
+            <directory>${project.build.directory}</directory>
+            <outputDirectory>lib</outputDirectory>
+            <includes>
+                <include>${project.artifactId}-${project.version}.jar</include>
+            </includes>
+            <fileMode>755</fileMode>
         </fileSet>
     </fileSets>
-    <files>
-        <file>
-            <source>startup.sh</source>
-            <outputDirectory>AlarmReport/bin</outputDirectory>
-            <filtered>true</filtered>
-        </file>
-    </files>
 </assembly>
