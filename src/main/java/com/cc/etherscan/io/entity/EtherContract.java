@@ -31,7 +31,7 @@ public class EtherContract extends Model<EtherContract> implements Serializable 
     @TableField("access_url")
     private String accessUrl;
 
-    private String transactions;
+    private Integer transactions;
 
     @TableField("create_address")
     private String createAddress;

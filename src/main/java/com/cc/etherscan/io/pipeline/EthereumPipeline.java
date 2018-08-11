@@ -53,7 +53,13 @@ public class EthereumPipeline implements Pipeline {
 
         EtherContract contract = new EtherContract();
         contract.setAddress(address);
-        contract.setTransactions(transactions);
+        Integer tx = null;
+        try {
+            tx = Integer.parseInt(transactions);
+        } catch (NumberFormatException e) {
+            log.error("transactions format error : {}", transactions);
+        }
+        contract.setTransactions(tx);
         contract.setCreateAddress(createAddress);
         contract.setTxn(txn);
         contract.setSourceCode(sourceCode);

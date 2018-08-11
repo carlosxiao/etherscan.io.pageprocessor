@@ -14,7 +14,7 @@
             <column name="contract_name" type="varchar(128)" remarks="合约名称"/>
             <column name="date_verified" type="varchar(32)" remarks="发布日期"/>
             <column name="access_url" type="varchar(128)" remarks="访问地址"/>
-            <column name="transactions" type="varchar(20)" remarks=""/>
+            <column name="transactions" type="INT" remarks="交易数量"/>
             <column name="create_address" type="varchar(128)" remarks=""/>
             <column name="txn" type="varchar(128)" remarks=""/>
             <column name="source_code" type="longtext" remarks="源代码"/>
