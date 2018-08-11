@@ -125,76 +125,29 @@
 
 	<profiles>
 		<profile>
-			<id>rpm-build</id>
-			<properties>
-				<USER_NAME>epai</USER_NAME>
-				<GROUP_NAME>epai</GROUP_NAME>
-				<APP_HOME>/home/epai/apps</APP_HOME>
-			</properties>
+			<id>tar-build</id>
 			<build>
 				<plugins>
 					<plugin>
-						<groupId>org.codehaus.mojo</groupId>
-						<artifactId>rpm-maven-plugin</artifactId>
-						<version>2.1.5</version>
-						<extensions>true</extensions>
+						<artifactId> maven-assembly-plugin </artifactId>
+						<configuration>
+							<descriptors>
+								<!-- 描述文件路径 -->
+								<descriptor>assembly.xml</descriptor>
+							</descriptors>
+						</configuration>
 						<executions>
 							<execution>
+								<!--名字任意 -->
+								<id>make-assembly</id>
+								<!-- 绑定到package生命周期阶段上 -->
+								<phase>package</phase>
 								<goals>
-									<goal>attached-rpm</goal>
+									<!-- 只运行一次 -->
+									<goal>single</goal>
 								</goals>
-								<phase>verify</phase>
 							</execution>
 						</executions>
-						<configuration>
-							<group>DH</group>
-							<summary>DH</summary>
-							<vendor>DH</vendor>
-							<packager>DH</packager>
-							<needarch>noarch</needarch>
-							<name>ether-contract-processor</name>
-							<prefixes>
-								<prefix>${APP_HOME}</prefix>
-							</prefixes>
-							<mappings>
-								<mapping>
-									<directory>${APP_HOME}/${project.artifactId}</directory>
-									<filemode>755</filemode>
-									<username>${USER_NAME}</username>
-									<groupname>${GROUP_NAME}</groupname>
-								</mapping>
-								<mapping>
-									<directory>${APP_HOME}/${project.artifactId}/lib</directory>
-									<filemode>755</filemode>
-									<username>${USER_NAME}</username>
-									<groupname>${GROUP_NAME}</groupname>
-									<sources>
-										<source>
-											<location>${basedir}/target/${project.artifactId}-${project.version}.jar
-											</location>
-										</source>
-									</sources>
-								</mapping>
-								<mapping>
-									<directory>${APP_HOME}/${project.artifactId}/bin</directory>
-									<filemode>755</filemode>
-									<username>${USER_NAME}</username>
-									<groupname>${GROUP_NAME}</groupname>
-									<sources>
-										<source>
-											<location>src/main/resources/bin
-											</location>
-										</source>
-									</sources>
-								</mapping>
-								<mapping>
-									<directory>${APP_HOME}/${project.artifactId}/logs</directory>
-									<filemode>755</filemode>
-									<username>${USER_NAME}</username>
-									<groupname>${GROUP_NAME}</groupname>
-								</mapping>
-							</mappings>
-						</configuration>
 					</plugin>
 				</plugins>
 			</build>
