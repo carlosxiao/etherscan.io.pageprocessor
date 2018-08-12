@@ -40,9 +40,9 @@ mybatis-plus:
     map-underscore-to-camel-case: true
     cache-enabled: false
 etherscan:
-  pageSize: 10
+  pageSize: 100
   startPage: 1
   totalPage: 1
   threadCount: 1
   intervalSeconds: 1
-  scanIntervalCron: 0 0/5 * * * ?
+  scanIntervalCron: 0 0/30 * * * ?
