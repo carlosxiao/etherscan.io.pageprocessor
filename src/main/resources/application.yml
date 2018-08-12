@@ -8,7 +8,7 @@ spring:
       pool-name: ESC-POOL
       connection-test-query: SELECT 1 FROM DUAL
   profiles:
-    active: test
+    active: dev
 liquibase:
   change-log: classpath:db-changelog.xml
 mybatis-plus:
@@ -45,3 +45,4 @@ etherscan:
   totalPage: 1
   threadCount: 1
   intervalSeconds: 1
+  scanIntervalCron: 0 0/5 * * * ?

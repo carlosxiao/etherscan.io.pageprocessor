@@ -42,7 +42,7 @@ public class EtherEumSchedule {
     @Value("${etherscan.intervalSeconds}")
     private int intervalSeconds = 4;
 
-    @Scheduled(cron="0 0/5 * * * ?")
+    @Scheduled(cron="${etherscan.scanIntervalCron}")
     public void start() {
         for (int i = startPage; i<= totalPage; i++) {
             Spider.create(new EthereumContractProcessor(redisTemplate, etherContractMapper))
