@@ -2,7 +2,8 @@ spring:
   redis:
     host: 127.0.0.1
     port: 10179
+    password: 2aVzLk8jcmJHh8Xo
   datasource:
     url: jdbc:mysql://127.0.0.1:3307/esc?useUnicode=true&characterEncoding=utf8
     username: esc
-    password: esc
+    password: d8Mo9u1JroPbKtXG

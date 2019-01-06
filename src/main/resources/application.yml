@@ -39,6 +39,8 @@ mybatis-plus:
   configuration:
     map-underscore-to-camel-case: true
     cache-enabled: false
+scheduling:
+  enabled: true
 etherscan:
   pageSize: 100
   startPage: 1

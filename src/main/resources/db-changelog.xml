@@ -7,7 +7,7 @@
     <property name="now" value="sysdate" dbms="mysql"/>
 
     <!--原则上，这里只留下以项目模块为单位的include, 名字建议采用模块全名-->
-    <!--<include file="classpath:changelog/ether-contract-changelog.xml"/>-->
+    <include file="classpath:changelog/ether-contract-changelog.xml"/>
 
 
 </databaseChangeLog>

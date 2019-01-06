@@ -4,11 +4,14 @@ import com.cc.etherscan.io.mapper.EtherContractMapper;
 import com.cc.etherscan.io.pipeline.EthereumPipeline;
 import com.cc.etherscan.io.processor.EthereumContractProcessor;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 import us.codecraft.webmagic.Spider;
 
+import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
 
 /**
@@ -42,7 +45,8 @@ public class EtherEumSchedule {
     @Value("${etherscan.intervalSeconds}")
     private int intervalSeconds = 4;
 
-    @Scheduled(cron="${etherscan.scanIntervalCron}")
+    //@Scheduled(cron="${etherscan.scanIntervalCron}")
+    @PostConstruct
     public void start() {
         for (int i = startPage; i<= totalPage; i++) {
             Spider.create(new EthereumContractProcessor(redisTemplate, etherContractMapper))

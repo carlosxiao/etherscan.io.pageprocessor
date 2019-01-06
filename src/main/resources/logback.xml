@@ -6,9 +6,9 @@
         </encoder>
     </appender>
     <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <file>${APP_HOME}/logs/spider.log</file>
+        <file>${APP_HOME}/logs/etherscan.log</file>
         <rollingPolicy class="ch.qos.logback.core.rolling.FixedWindowRollingPolicy">
-            <fileNamePattern>${APP_HOME}/logs/spider.%i.log.zip</fileNamePattern>
+            <fileNamePattern>${APP_HOME}/logs/etherscan.%i.log.zip</fileNamePattern>
             <minIndex>1</minIndex>
             <maxIndex>3</maxIndex>
         </rollingPolicy>
