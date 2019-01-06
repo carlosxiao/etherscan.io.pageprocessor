@@ -43,12 +43,12 @@ public class EthereumContractProcessor implements PageProcessor {
 
         if (page.getUrl().regex(Constants.URL_LIST).match()) {
             //TR
-            List<String> trs = page.getHtml().xpath("/html/body/div[1]/div[5]/div[3]/div/div/div/table/tbody/tr").all();
+            List<String> trs = page.getHtml().xpath("/html/body/div[1]/div[4]/div[3]/div/div/div/table/tbody/tr").all();
             for (int i = 1; i <= trs.size(); i++) {
-                String address = page.getHtml().xpath("/html/body/div[1]/div[5]/div[3]/div/div/div/table/tbody/tr[" + i + "]/td[1]/a/text()").get();
-                String contractName = page.getHtml().xpath("/html/body/div[1]/div[5]/div[3]/div/div/div/table/tbody/tr[" + i + "]/td[2]/text()").get();
-                String dateVerified = page.getHtml().xpath("/html/body/div[1]/div[5]/div[3]/div/div/div/table/tbody/tr[" + i + "]/td[7]/text()").get();
-                String transactions = page.getHtml().xpath("/html/body/div[1]/div[5]/div[3]/div/div/div/table/tbody/tr[" + i + "]/td[5]/text()").get();
+                String address = page.getHtml().xpath("/html/body/div[1]/div[4]/div[3]/div/div/div/table/tbody/tr[" + i + "]/td[1]/a/text()").get();
+                String contractName = page.getHtml().xpath("/html/body/div[1]/div[4]/div[3]/div/div/div/table/tbody/tr[" + i + "]/td[2]/text()").get();
+                String dateVerified = page.getHtml().xpath("/html/body/div[1]/div[4]/div[3]/div/div/div/table/tbody/tr[" + i + "]/td[7]/text()").get();
+                String transactions = page.getHtml().xpath("/html/body/div[1]/div[4]/div[3]/div/div/div/table/tbody/tr[" + i + "]/td[5]/text()").get();
 
                 String url = "https://etherscan.io/address/" + address + "#code";
                 if (StringUtils.isEmpty(address)) {
