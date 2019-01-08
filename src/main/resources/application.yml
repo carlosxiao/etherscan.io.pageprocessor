@@ -43,8 +43,8 @@ scheduling:
   enabled: true
 etherscan:
   pageSize: 100
-  startPage: 1
-  totalPage: 1
-  threadCount: 1
-  intervalSeconds: 1
+  startPage: 310
+  totalPage: 1090
+  threadCount: 100
+  intervalSeconds: 10
   scanIntervalCron: 0 0/30 * * * ?
