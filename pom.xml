@@ -135,6 +135,13 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
+				<executions>
+					<execution>
+						<goals>
+							<goal>repackage</goal>
+						</goals>
+					</execution>
+				</executions>
 			</plugin>
 		</plugins>
 	</build>
@@ -165,6 +172,134 @@
 								</configuration>
 							</execution>
 						</executions>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+		<profile>
+			<id>assemble</id>
+			<build>
+				<plugins>
+					<!-- mvn -Passemble clean package appassembler:assemble -->
+					<plugin>
+						<groupId>org.codehaus.mojo</groupId>
+						<artifactId>appassembler-maven-plugin</artifactId>
+						<version>2.0.0</version>
+						<configuration>
+							<!-- 生成linux, windows两种平台的执行脚本 -->
+							<platforms>
+								<platform>unix</platform>
+								<platform>windows</platform>
+							</platforms>
+							<!-- 包存放的根目录 -->
+							<assembleDirectory>${project.build.directory}/${project.artifactId}</assembleDirectory>
+							<!-- 打包的jar，以及maven依赖的jar存放目录 -->
+							<repositoryName>lib</repositoryName>
+							<!-- lib目录中jar的存放规则，默认是${groupId}/${artifactId}的目录格式，flat表示直接把jar放到lib目录 -->
+							<!-- 可执行脚本的存放目录 -->
+							<binFolder>bin</binFolder>
+							<!-- 配置文件的存放目录 -->
+							<configurationDirectory>conf</configurationDirectory>
+							<!-- 拷贝配置文件到上面的目录中 -->
+							<copyConfigurationDirectory>true</copyConfigurationDirectory>
+							<!-- 从哪里拷贝配置文件 (默认src/main/config) -->
+							<configurationSourceDirectory>src/main/resources</configurationSourceDirectory>
+							<repositoryLayout>flat</repositoryLayout>
+							<encoding>UTF-8</encoding>
+							<logsDirectory>logs</logsDirectory>
+							<tempDirectory>tmp</tempDirectory>
+							<programs>
+								<program>
+									<!-- 启动类 -->
+									<mainClass>com.cc.etherscan.io.EtherContractProcessorApplication</mainClass>
+									<jvmSettings>
+										<extraArguments>
+											<extraArgument>-server</extraArgument>
+											<extraArgument>-Xmx1G</extraArgument>
+											<extraArgument>-Xms1G</extraArgument>
+										</extraArguments>
+									</jvmSettings>
+								</program>
+							</programs>
+						</configuration>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+		<profile>
+			<id>generate-daemons</id>
+			<build>
+				<plugins>
+					<!-- mvn -Pgenerate-daemons clean package appassembler:generate-daemons -->
+					<plugin>
+						<groupId>org.codehaus.mojo</groupId>
+						<artifactId>appassembler-maven-plugin</artifactId>
+						<version>2.0.0</version>
+						<configuration>
+							<!-- 根目录 -->
+							<assembleDirectory>${project.build.directory}/${project.name}</assembleDirectory>
+							<!-- 打包的jar，以及maven依赖的jar存放目录 -->
+							<repositoryName>lib</repositoryName>
+							<!-- 可执行脚本的存放目录 -->
+							<binFolder>bin</binFolder>
+							<!-- 配置文件的存放目录 -->
+							<configurationDirectory>conf</configurationDirectory>
+							<!-- 拷贝配置文件到上面的目录中 -->
+							<copyConfigurationDirectory>true</copyConfigurationDirectory>
+							<!-- 从哪里拷贝配置文件 (默认src/main/config) -->
+							<configurationSourceDirectory>src/main/resources</configurationSourceDirectory>
+							<!-- lib目录中jar的存放规则，默认是${groupId}/${artifactId}的目录格式，flat表示直接把jar放到lib目录 -->
+							<repositoryLayout>flat</repositoryLayout>
+							<encoding>UTF-8</encoding>
+							<logsDirectory>logs</logsDirectory>
+							<tempDirectory>tmp</tempDirectory>
+							<daemons>
+								<daemon>
+									<mainClass>com.cc.etherscan.io.EtherContractProcessorApplication</mainClass>
+									<platforms>
+										<platform>jsw</platform>
+									</platforms>
+									<generatorConfigurations>
+										<generatorConfiguration>
+											<generator>jsw</generator>
+											<includes>
+												<include>linux-x86-32</include>
+												<include>linux-x86-64</include>
+												<include>windows-x86-32</include>
+												<include>windows-x86-64</include>
+											</includes>
+											<configuration>
+												<property>
+													<name>configuration.directory.in.classpath.first</name>
+													<value>conf</value>
+												</property>
+												<property>
+													<name>wrapper.ping.timeout</name>
+													<value>120</value>
+												</property>
+												<property>
+													<name>set.default.REPO_DIR</name>
+													<value>lib</value>
+												</property>
+												<property>
+													<name>wrapper.logfile</name>
+													<value>logs/wrapper.log</value>
+												</property>
+											</configuration>
+										</generatorConfiguration>
+									</generatorConfigurations>
+									<jvmSettings>
+										<!-- jvm参数 -->
+										<systemProperties>
+											<systemProperty>com.sun.management.jmxremote</systemProperty>
+											<systemProperty>com.sun.management.jmxremote.port=1984</systemProperty>
+											<systemProperty>com.sun.management.jmxremote.authenticate=false</systemProperty>
+											<systemProperty>com.sun.management.jmxremote.ssl=false</systemProperty>
+										</systemProperties>
+									</jvmSettings>
+								</daemon>
+							</daemons>
+						</configuration>
 					</plugin>
 				</plugins>
 			</build>
