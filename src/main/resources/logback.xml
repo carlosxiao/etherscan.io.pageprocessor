@@ -30,5 +30,5 @@
     <logger name="java.sql.Statement" level="ERROR"/>
     <logger name="java.sql.PreparedStatement" level="ERROR"/>
     <logger name="org.apache.http" level="ERROR"/>
-    <logger name="com.cc.etherscan.io" level="ERROR"/>
+    <logger name="com.cc.etherscan.io" level="DEBUG"/>
 </configuration>
