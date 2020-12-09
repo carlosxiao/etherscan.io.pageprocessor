@@ -13,7 +13,7 @@ public class ImgTest {
         Noise engine = new Noise();
 
         // 2.active
-        int retAct=engine.active("");
+        int retAct=engine.active("a");
         if (Const.MACT_SUCCESS == retAct) {
             System.out.println(Const.getString(Const.MACT_SUCCESS));
         } else if (Const.MACT_TIME_PASSED == retAct) {
@@ -30,7 +30,7 @@ public class ImgTest {
 
         long startTime = System.currentTimeMillis();
 
-	int ret = engine.deWatermark("/Users/carlosxiao/Desktop/1.jpg", outFilename,"mask.bmp");
+	int ret = engine.deWatermark("C:\\Users\\CarlosXiao\\Desktop\\222.jpg", outFilename,"C:\\Users\\CarlosXiao\\Desktop\\mask.bmp");
 //	int ret = engine.deSpot("circle.jpg", outFilename);
 //        int ret = engine.deFog("mist.jpg", outFilename);
 //	int ret = engine.deDark("dark.jpg", outFilename);

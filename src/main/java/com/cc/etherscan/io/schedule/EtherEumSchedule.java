@@ -1,13 +1,11 @@
 package com.cc.etherscan.io.schedule;
 
 import com.cc.etherscan.io.mapper.EtherContractMapper;
+import com.cc.etherscan.io.mapper.YfwProductInfoDao;
 import com.cc.etherscan.io.pipeline.EthereumPipeline;
-import com.cc.etherscan.io.processor.EthereumContractProcessor;
+import com.cc.etherscan.io.processor.PharmacyProcessor;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.data.redis.core.RedisTemplate;
-import org.springframework.scheduling.annotation.EnableScheduling;
-import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 import us.codecraft.webmagic.Spider;
 
@@ -30,6 +28,9 @@ public class EtherEumSchedule {
     @Resource
     private EtherContractMapper etherContractMapper;
 
+    @Resource
+    private YfwProductInfoDao yfwProductInfoDao;
+
     @Value("${etherscan.pageSize}")
     private int pageSize = 0;
 
@@ -48,18 +49,11 @@ public class EtherEumSchedule {
     //@Scheduled(cron="${etherscan.scanIntervalCron}")
     @PostConstruct
     public void start() {
-        for (int i = startPage; i<= totalPage; i++) {
-            Spider.create(new EthereumContractProcessor(redisTemplate, etherContractMapper))
-                    .addUrl("https://etherscan.io/contractsVerified/" + i + "?ps=" + pageSize)
-                    .addPipeline(ethereumPipeline)
-                    .thread(threadCount)
-                    .run();
-            try {
-                Thread.sleep(intervalSeconds * 1000);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-        }
-
+         Spider.create(new PharmacyProcessor(yfwProductInfoDao))
+//                .addUrl("https://www.yaofangwang.com/medicine-261518.html")
+//                .addUrl("https://www.yaofangwang.com/catalog-10-p8.html")
+                .addUrl("https://www.yaofangwang.com")
+                .thread(1)
+                .run();
     }
 }

@@ -2,10 +2,7 @@ package com.cc.etherscan.io;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.sun.image.codec.jpeg.JPEGCodec;
-import com.sun.image.codec.jpeg.JPEGImageDecoder;
 import org.junit.Test;
-import sun.awt.image.PNGImageDecoder;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
@@ -64,23 +61,7 @@ public class JsonTest {
         String outputPATH = PATH_DEST + "new/new.jpg";
         // 得到文件流
         FileInputStream fileInputStream = new FileInputStream(new File(pathSrc));
-        // 得到输入的编码器，将文件流进行jpg格式编码
-        JPEGImageDecoder decoder = JPEGCodec.createJPEGDecoder(fileInputStream);
-        // 得到编码后的图片对象
-        BufferedImage image = decoder.decodeAsBufferedImage();
-        Graphics g = image.getGraphics();
-        InputStream imageSeal = new FileInputStream(new File(sealFile));
-        // 得到输入的编码器，将文件流进行jpg格式编码
-        // 得到编码后的图片对象
-        BufferedImage image2 = ImageIO.read(new File(sealFile));
-        // 加盖图片章
-        ImageObserver imageObserver = null;
-        int x = image.getWidth() - (image2.getWidth() + 400);
-        int y = image.getHeight() - (image2.getHeight() + 600);
-        g.drawImage(image2, x, y, imageObserver);
-        g.dispose();
-        ImageIO.write(image, "jpeg", new File(outputPATH));
-        System.out.println("ok");
+
     }
 
     public static void saveFixedBoundIcon(File imageFile, int height, int width) throws Exception {

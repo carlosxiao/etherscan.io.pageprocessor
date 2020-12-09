@@ -12,9 +12,9 @@ public class OcrTest {
     @Test
     public void should_1 () throws TesseractException {
         ITesseract instance = new Tesseract();
-        instance.setDatapath("/Users/carlosxiao/Desktop/");
-        instance.setLanguage("chi_sim");
-        String result = instance.doOCR(new File("/Users/carlosxiao/Desktop/2222.jpg"));
+        instance.setDatapath("D:\\tess4j");
+        instance.setLanguage("chi_sim+eng");
+        String result = instance.doOCR(new File("C:\\Users\\CarlosXiao\\Desktop\\222.jpg"));
         System.out.println(result);
     }
 }
