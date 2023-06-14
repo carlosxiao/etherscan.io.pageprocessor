@@ -126,7 +126,7 @@
 		<dependency>
 			<groupId>cn.hutool</groupId>
 			<artifactId>hutool-core</artifactId>
-			<version>4.6.10</version>
+			<version>5.8.19</version>
 		</dependency>
 		<!-- https://mvnrepository.com/artifact/net.sourceforge.tess4j/tess4j -->
 		<dependency>
